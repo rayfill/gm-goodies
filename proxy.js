@@ -21,7 +21,7 @@ let proxy = null;
       get: (target, prop, receiver) => {
 
 	let trapFunc = gettrap(prop);
-	if (trapFunc != null) {
+	if (trapFunc !== null) {
 	  return trapFunc(receiver, target, prop, undefined);
 	}
 	
@@ -37,11 +37,10 @@ let proxy = null;
       set: (target, prop, value, receiver) => {
 
 	let trapFunc = settrap(prop);
-	if (trapFunc != null) {
-	  trapFunc(receiver, target, prop, value);
-	  return;
+	if (trapFunc !== null) {
+	  return trapFunc(receiver, target, prop, value);
 	}
-	target[prop] = value;
+	return target[prop] = value;
       }
     }
   };
