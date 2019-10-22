@@ -46,3 +46,4 @@ function xhrHook(hook) {
   
   unsafeWindow.XMLHttpRequest = new Proxy(xmlhttpRequest, constructorHook);
 }
+self.xhrHook = xhrHook;
