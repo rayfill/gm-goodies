@@ -6,3 +6,5 @@ function delay(func, delayTime) {
   let id = setTimeout(func, delayTime);
   return () => { clearTimeout(id); };
 }
+
+self.delay = delay;
