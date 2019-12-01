@@ -17,7 +17,7 @@ function xhrHook2(hook) {
 	  responseType: xhr.responseType,
           url: xhr.responseURL,
           content: xhr.response
-        });
+        }, "*");
         xhr.removeEventListener("load", callback);
       };
       xhr.addEventListener("load", callback);
