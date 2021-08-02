@@ -331,8 +331,8 @@
         xhr_details.data = request._bodyInit;
       }
 
-      if (typeof (input.onDownloadProgress) === 'function') {
-        xhr_details.onprogress = input.onDownloadProgress;
+      if (typeof (init.onDownloadProgress) === 'function') {
+        xhr_details.onprogress = init.onDownloadProgress;
       }
 
       xhr_details.responseType = "blob";
