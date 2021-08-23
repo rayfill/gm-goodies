@@ -35,7 +35,7 @@ function xhrHook(hook) {
   const xmlhttpRequest = unsafeWindow.XMLHttpRequest;
 
   let methodHook = {
-    get: (xhr, prop, proxy) => {
+    get: (xhr, prop, _proxy) => {
       let funcOrValue = xhr[prop];
 
       if (typeof funcOrValue === "function") {
@@ -43,7 +43,6 @@ function xhrHook(hook) {
 
           return (...args) => {
             let savedOnload = xhr.onload;
-	    
             xhr.onload = (...args) => {
               hook.apply(hook, [xhr].concat(args));
               xhr.onload = savedOnload;
@@ -52,11 +51,11 @@ function xhrHook(hook) {
                 return savedOnload.apply(xhr, args);
               }
             };
-	    
+
             xhr.send.apply(xhr, args);
-          }
+          };
         }
-	
+
         return (...args) => {
           let result = xhr[prop].apply(xhr, args);
           return result;
@@ -65,7 +64,7 @@ function xhrHook(hook) {
       return funcOrValue;
     },
 
-    set: (xhr, prop, value, proxy) => {
+    set: (xhr, prop, value, _proxy) => {
       xhr[prop] = value;
       return true;
     }
@@ -81,3 +80,5 @@ function xhrHook(hook) {
 }
 self.xhrHook = xhrHook;
 self.xhrHook2 = xhrHook2;
+
+module.exports = { xhrHook, xhrHook2 };
