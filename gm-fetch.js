@@ -3,6 +3,8 @@
 
   var Promise = window.Bluebird || window.Promise;
 
+  let self = typeof window === undefined ? global : window;
+
   if (self.GM_fetch) {
     return;
   }
@@ -331,7 +333,7 @@
         xhr_details.data = request._bodyInit;
       }
 
-      if (typeof (init.onDownloadProgress) === 'function') {
+      if (init !== undefined && typeof (init.onDownloadProgress) === 'function') {
         xhr_details.onprogress = init.onDownloadProgress;
       }
 
@@ -352,4 +354,5 @@
     });
   };
   self.GM_fetch.polyfill = true;
+  module.exports = { GM_fetch };
 })();
