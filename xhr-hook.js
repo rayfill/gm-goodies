@@ -78,7 +78,11 @@ function xhrHook(hook) {
 
   unsafeWindow.XMLHttpRequest = new Proxy(xmlhttpRequest, constructorHook);
 }
-self.xhrHook = xhrHook;
-self.xhrHook2 = xhrHook2;
 
-module.exports = { xhrHook, xhrHook2 };
+if (typeof self === 'object') {
+  self.xhrHook = xhrHook;
+  self.xhrHook2 = xhrHook2;
+}
+if (typeof module === 'object') {
+  module.exports = { xhrHook, xhrHook2 };
+}
