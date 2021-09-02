@@ -354,5 +354,7 @@
     });
   };
   self.GM_fetch.polyfill = true;
-  module.exports = { GM_fetch };
+  if (typeof module === 'object') {
+    module.exports = { GM_fetch };
+  }
 })();
